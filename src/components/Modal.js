@@ -18,10 +18,11 @@ export default function ModalDrawer() {
 
   let{isItOpen,  onClose, setData ,data} = useContext(DataContext)
   
-  let [change, setChange] = useState(data?data:{
+  let empty = {
     "0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":""
+  }
 
-  })
+  let [change, setChange] = useState(data?data:empty)
   if(!data){
     isItOpen = true
   }
@@ -38,6 +39,7 @@ export default function ModalDrawer() {
     if(!arr.includes("")){
       setData(change)
       localStorage.setItem("data",JSON.stringify(change))
+      onClose()
     }
   }
   return (  
@@ -98,7 +100,7 @@ export default function ModalDrawer() {
             <Button colorScheme='blue' mr={3} onClick={saveData}>
               Save
             </Button>
-            <Button variant='ghost' onClick={()=>setData(1)}>Secondary Action</Button>
+            <Button variant='ghost' colorScheme='red' onClick={()=>setChange(empty)}>Clear</Button>
           </ModalFooter>
         </ModalContent>
       </Modal>

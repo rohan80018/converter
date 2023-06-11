@@ -1,4 +1,4 @@
-import {  Flex, Box, Center } from "@chakra-ui/react"
+import {  Flex, Center } from "@chakra-ui/react"
 import { MoonIcon, SunIcon } from "@chakra-ui/icons"
 
 
