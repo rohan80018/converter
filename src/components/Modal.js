@@ -10,6 +10,7 @@ import {
 import { Flex, Input, Grid, Button} from '@chakra-ui/react'
 import { useContext, useState } from 'react'
 import DataContext from '../context/DataContext'
+import ldb from 'localdata'
 
 
 export default function ModalDrawer() {
@@ -38,7 +39,8 @@ export default function ModalDrawer() {
     let arr = Object.values(change)
     if(!arr.includes("")){
       setData(change)
-      localStorage.setItem("data",JSON.stringify(change))
+      // localStorage.setItem("data",JSON.stringify(change))
+      ldb.set('data', change);
       onClose()
     }
   }

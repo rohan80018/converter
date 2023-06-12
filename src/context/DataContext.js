@@ -1,5 +1,6 @@
 import {createContext, useState} from "react"
 import { useColorMode, useDisclosure } from "@chakra-ui/react";
+import ldb from 'localdata'
 
 const DataContext = createContext();
 
@@ -10,7 +11,12 @@ export const DataProvider = ({children}) => {
   const { colorMode, toggleColorMode } = useColorMode()
   let lightMode = colorMode ==="light"? true:false
 
-  let [data, setData] = useState(localStorage.getItem("data")?JSON.parse(localStorage.getItem("data")):null
+  // let [data, setData] = useState(localStorage.getItem("data")?JSON.parse(localStorage.getItem("data")):null
+  //   // "0":"M","1":"B","2":"J","3":"H","4":"G","5":"F","6":"Q","7":"S","8":"D","9":"A"
+  //   // "0":null,"1":null,"2":"","3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null
+  // )
+  let ldbdata = ldb.get("data",function(value){return value})
+  let [data, setData] = useState(ldbdata?ldbdata:null
     // "0":"M","1":"B","2":"J","3":"H","4":"G","5":"F","6":"Q","7":"S","8":"D","9":"A"
     // "0":null,"1":null,"2":"","3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null
   )
