@@ -8,7 +8,7 @@ import {
   ModalCloseButton,
 } from '@chakra-ui/react'
 import { Flex, Input, Grid, Button} from '@chakra-ui/react'
-import { useContext, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import DataContext from '../context/DataContext'
 import ldb from 'localdata'
 
@@ -17,16 +17,26 @@ export default function ModalDrawer() {
   // let { isOpen, onOpen, onClose } = useDisclosure()
   
 
-  let{isItOpen,  onClose, setData ,data} = useContext(DataContext)
+  let{isItOpen,  onClose, setData ,data,ldbdata} = useContext(DataContext)
   
   let empty = {
     "0":"","1":"","2":"","3":"","4":"","5":"","6":"","7":"","8":"","9":""
   }
-
+  
   let [change, setChange] = useState(data?data:empty)
-  if(!data){
-    isItOpen = true
+  
+  if(!Object.keys(data).length){
+    // setTimeout(()=>{
+    //   isItOpen=true
+    // },500)
+    isItOpen=true
   }
+  console.log(data)
+
+  useEffect(()=>{
+    
+    setChange(data)
+  },[isItOpen])
 
   function handleChange(event){
     let{name, value} = event.target
@@ -39,8 +49,9 @@ export default function ModalDrawer() {
     let arr = Object.values(change)
     if(!arr.includes("")){
       setData(change)
-      // localStorage.setItem("data",JSON.stringify(change))
-      ldb.set('data', change);
+      // data = change
+      localStorage.setItem("data",JSON.stringify(change))
+      // ldb.set('data', change);
       onClose()
     }
   }

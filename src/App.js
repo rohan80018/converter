@@ -2,7 +2,7 @@ import './App.css';
 import { Flex, Grid, Center, GridItem, Text} from '@chakra-ui/react'
 import NavBar from './components/navbar';
 import DataContext from "./context/DataContext";
-import { useContext, useState } from 'react';
+import { useContext, useState,useEffect } from 'react';
 import { ArrowLeftIcon } from '@chakra-ui/icons';
 import ModalDrawer from './components/Modal';
 
@@ -14,6 +14,7 @@ function App() {
 
   let [top, setTop] = useState("")
   let[bottom ,setBottom] = useState("")
+
 
   function changeMode(){
     setMode(mode==="ABC"?"123":"ABC")
@@ -49,7 +50,7 @@ function App() {
       <Flex maxW="480px" w="100%" maxH="896px" h="100%" direction="column" >
         <NavBar />
         <Flex direction="column" justify="space-between" h="100%" bg={lightMode?"":"#1a202c"}>
-          <Flex h="35%" direction="column" justify={'flex-end'} align={'flex-end'}>
+          <Flex h="35%" direction="column" justify={'flex-end'} align={'flex-end'} overflow="hidden">
             <Text fontSize="40px" color={lightMode?'gray.400':"gray.500"}>{top}</Text>
             <Text fontSize="75px">{bottom}</Text>
           <ModalDrawer />
